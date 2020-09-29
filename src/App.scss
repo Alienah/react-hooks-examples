@@ -66,19 +66,3 @@ $white-color: #ffffff;
   color: $white-color;
 }
 
-.column {
-  font-size: 0;
-  min-width: 300px;
-}
-
-.square {
-  display: inline-flex;
-  align-items: baseline;
-  justify-content: center;
-  border: 1px solid gray;
-  font-size: 80px;
-  width: 100px;
-  height: 100px;
-  box-sizing: border-box;
-  vertical-align: middle;
-}
