@@ -9,20 +9,20 @@ import loanReducer from './store/loanReducer';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 
-const store = createStore(
-  combineReducers({
-    balanceReducer,
-    loanReducer
-  }),
-  applyMiddleware(thunk)
-);
+// const store = createStore(
+//   combineReducers({
+//     balanceReducer,
+//     loanReducer
+//   }),
+//   applyMiddleware(thunk)
+// );
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
+  // <Provider store={store}>
+    // <React.StrictMode>
+      <App />,
+    // </React.StrictMode>,
+  // </Provider>,
   document.getElementById('root')
 );
 

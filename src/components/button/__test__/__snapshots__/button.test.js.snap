@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshop 1`] = `
+<div
+  className="button"
+  data-testid="button"
+>
+  save
+</div>
+`;
+
+exports[`matches snapshop with another text 1`] = `
+<div
+  className="button"
+  data-testid="button"
+>
+  click
+</div>
+`;
