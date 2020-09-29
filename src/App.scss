@@ -36,15 +36,6 @@ $white-color: #ffffff;
   text-decoration: underline;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .name {
   color: gray;
   border: 1px solid grey;
@@ -59,40 +50,35 @@ $white-color: #ffffff;
   border-style: dotted;
 }
 
-.remove-item-btn {
-  width: 150px;
+.button {
   padding: 10px;
-  margin-top: 12px;
+  margin-bottom: 12px;
+  background-color: white;
   border-radius: 5px;
+  outline: none;
+  border: 1px solid gray;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-.inputs-container input {
-  margin: 4px 0;
+.button:hover {
+  background-color: $dark-color;
+  color: $white-color;
 }
 
-.input {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.column {
+  font-size: 0;
+  min-width: 300px;
 }
 
-.nav-list {
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-}
-
-.nav-item {
-  // min-width: 180px;
-  margin-right: 16px;
-  border: 1px solid grey;
-  padding: 6px;
-}
-
-.nav-item:last-of-type {
-  margin-right: 0;
-}
-
-.link-active {
-  color: green;
+.square {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  border: 1px solid gray;
+  font-size: 80px;
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+  vertical-align: middle;
 }
