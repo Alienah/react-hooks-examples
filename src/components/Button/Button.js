@@ -2,6 +2,11 @@ import React from 'react';
 import './../../styles/common.scss';
 import './Button-style.scss'
 
+/**
+ * @deprecated Don't use this componente after 2020
+ * @author [Aida Albarrán](https://github.com/Alienah)
+ * @version 1.0.0
+ */
 function Button({children, type, onClick}) {
   let localClass = 'primary';
   if (type === 'primary') {
