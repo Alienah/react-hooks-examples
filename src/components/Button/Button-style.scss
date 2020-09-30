@@ -1,0 +1,46 @@
+@import './../../styles/_vars.scss';
+
+.button {
+  * {
+    border-style: solid;
+    border-width: 1px;
+    text-transform: uppercase;
+  }
+  .primary,
+  .secondary {
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .primary {
+    border-color: $yellow1;
+    &:hover {
+      color: $white;
+      background-color: $gray1;
+      border-color: $white;
+    }
+    &:active {
+      color: $gray1;
+      background-color: $white;
+      border-color: $gray1;
+    }
+  }
+  .disabled {
+    color: rgba(150, 149, 149, 0.70);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(150, 149, 149, 0.70);
+
+  }
+
+  .secondary {
+    background-color: $white;
+    border-color: $gray1;
+    color: $gray1;
+    &:hover {
+      -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+      -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+      box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+      border-color: transparent;
+    }
+  }
+}

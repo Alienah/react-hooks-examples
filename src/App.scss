@@ -50,22 +50,6 @@ $white-color: #ffffff;
   border-style: dotted;
 }
 
-.button {
-  padding: 10px;
-  margin-bottom: 12px;
-  background-color: white;
-  border-radius: 5px;
-  outline: none;
-  border: 1px solid gray;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.button:hover {
-  background-color: $dark-color;
-  color: $white-color;
-}
-
 .list {
   list-style: none;
   margin: 0;
