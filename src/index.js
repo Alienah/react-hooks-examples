@@ -3,26 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {createStore, combineReducers, applyMiddleware} from 'redux';
-import balanceReducer from './store/balanceReducer';
-import loanReducer from './store/loanReducer';
-import {Provider} from 'react-redux';
-import thunk from 'redux-thunk';
-
-const store = createStore(
-  combineReducers({
-    balanceReducer,
-    loanReducer
-  }),
-  applyMiddleware(thunk)
-);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
