@@ -215,6 +215,8 @@ Para trabajar con typescript, en vez de crear el proyecto con create-react-app d
 
 ```npx create-react-app react-hooks-with-typescript --typescript```
 
+O el más actual:
+
 ```npx create-react-app react-hooks-with-typescript --template typescript```
 
 ### Uso y ejemplos
