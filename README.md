@@ -1,68 +1,165 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# REUSABLE COMPONENTS LIBRARY EXAMPLE
 
-## Available Scripts
+## Install
 
-In the project directory, you can run:
+Run ```npm i``` to install all dependencies
 
-### `npm start`
+## Run website
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Run ```npm start``` to see the examples in [http://localhost:3000](http://localhost:3000) in the browser
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+ℹ️ This documentation is written in Spanish, as learning notes. For more information on how to start the project and what commands can be used, you can consult the documentation provided by React at [doc folder](/doc)
 
-### `npm test`
+# 📝 MONTANDO UNA LIBRERÍA DE COMPONENTES REUSABLE.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para ver un ejemplo de estructura de carpetas, puedes ver la que tenemos en este mini proyecto. Por ahora sólo tenemos un botón, pero nos podemos hacer una idea de cómo podría ir creciendo.
 
-### `npm run build`
+Una de las cuestiones a tener en cuenta cuando estás montando una librería de componentes es documentarla bien para que pueda ser usada por terceros, ya que podrían consumir tus componentes para sus aplicaciones.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Hay diferentes librerías que nos ayudan enormemente con esa tarea. Ejemplos de librerías para documentar:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* Styleguidist
+* Storybook
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+De momento vamos a hablar de Styleguidist, pero en un futuro añadiremos ejemplos con storybook
 
-### `npm run eject`
+## STYLEGUIDIST
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Install
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```npm install react-styleguidist --save-dev```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### How to use
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Buscará en el proyecto los componentes, así que si no los tienes creados en la estructura src/componentes, que es la ruta que busca por defecto, tendrás que configurarla.
 
-## Learn More
+Se basa en webpack, que como hemos creado la aplicación con create-react-app, ya viene instalado.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Lo único que tendríamos que hacer, por tanto, es crear el archivo con la documentación que leerá **styleguidist**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Ejemplo
 
-### Code Splitting
+En nuestra carpeta src/components/Button tenemos este botón
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```js
+// Button.js
 
-### Analyzing the Bundle Size
+import React from 'react';
+import './../../styles/common.scss';
+import './Button-style.scss'
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+function Button({children, type, onClick}) {
+  let localClass = 'primary';
+  if (type === 'primary') {
+    localClass = 'primary';
+  }
+  if (type === 'secondary') {
+    localClass = 'secondary';
+  }
+  if (type === 'disabled') {
+    localClass = 'disabled';
+  }
+  const classes = `bg-yellow font-black vertical-pad-8 width100 radius15 ${localClass}`
 
-### Making a Progressive Web App
+  return (
+  <div className="button">
+    <button onClick={onClick} className={classes}>{children}</button>
+  </div>
+  )
+}
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+export default Button;
+```
+Vamos a crear un README.md
 
-### Advanced Configuration
+```md
+# Default Button
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+```js
+<Button>Click me</Button>
+```
 
-### Deployment
+# Primary Button
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+```js
+<Button type="primary">Click me</Button>
+```
 
-### `npm run build` fails to minify
+# Secondary Button
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```js
+<Button type="secondary">Click me</Button>
+```
+
+# Disabled Button
+
+```js
+<Button type="disabled">Click me</Button>
+```
+```
+
+Y ejecutamos:
+
+```bash
+npx styleguidist server
+```
+
+### Modificadores
+
+**noeditor**
+
+Si quisiéramos limilarlo para que no se vea el código en la web, sólo el ejemplo del componente en sí, pondríamos la etiqueta ```noeditor```
+
+```md
+# Disabled Button
+
+```js noeditor
+<Button type="disabled">Click me</Button>
+```
+```
+```
+
+**static**
+
+Si queremos que sí se muestre el código, pero que no se pueda modificar, y que no muestre la renderización, usamos ```static```.
+
+Por ejemplo para ejemplos de código en los que se muestra cómo se importa algo o código en general que no quieres que se ejecute en la guía.
+
+### Decoradores para documentar
+
+También podríamos añadir en el propio componente decoradores que se mostrarán en la página al inicio.
+
+Podríamos añadir por ejemplo:
+
+```js
+import React from 'react';
+import './../../styles/common.scss';
+import './Button-style.scss'
+
+/**
+ * @deprecated Don't use this componente after 2020
+ * @author [Aida Albarrán](https://github.com/Alienah)
+ * @version 1.0.0
+ */
+function Button({children, type, onClick}) {
+  let localClass = 'primary';
+  if (type === 'primary') {
+    localClass = 'primary';
+  }
+  if (type === 'secondary') {
+    localClass = 'secondary';
+  }
+  if (type === 'disabled') {
+    localClass = 'disabled';
+  }
+  const classes = `bg-yellow font-black vertical-pad-8 width100 radius15 ${localClass}`
+
+  return (
+  <div className="button">
+    <button onClick={onClick} className={classes}>{children}</button>
+  </div>
+  )
+}
+
+export default Button;
+```
