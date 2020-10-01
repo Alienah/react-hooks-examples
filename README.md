@@ -3,12 +3,19 @@
 This repository has several branches with differentes uses and examples
 
 👩‍💻 [Example with Redux](https://github.com/Alienah/react-hooks-examples/tree/example-with-redux)
+
 👩‍💻 [Example with Test libraries](https://github.com/Alienah/react-hooks-examples/tree/example-with-test)
+
 👩‍💻 [Example of components library with styleguidist](https://github.com/Alienah/react-hooks-examples/tree/example-reusable-components-library)
+
 👩‍💻 [Example typing with PropTypes library](https://github.com/Alienah/react-hooks-examples/tree/example-proptypes)
+
 👩‍💻 [Example typing with FlowTypes library](https://github.com/Alienah/react-hooks-examples/tree/example-flowtypes)
+
 👩‍💻 [Example typing with Typescript library](https://github.com/Alienah/react-hooks-examples/tree/example-typescript)
+
 👩‍💻 [Example using React hooks. Tic Tac Toe game](https://github.com/Alienah/react-hooks-examples/tree/example-tic-tac-toe)
+
 👩‍💻 [Example using React hooks. Draggable list](https://github.com/Alienah/react-hooks-examples/tree/example-dragable-list)
 
 ## Install
