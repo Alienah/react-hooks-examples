@@ -918,7 +918,7 @@ Los objetos de react crean lo que llamamos virtual DOM, que es como un DOM paral
 
 JSX ==> VIRTUAL DOM ==> DOM
 
-Los cilos de vida han cambiado desde que se han introducido los hooks:
+Los ciclos de vida han cambiado desde que se han introducido los hooks:
 
 * __Con clases__:
 constructor
@@ -930,9 +930,25 @@ getSnapshotBeforeUpdate
 componentDidMount
 componentDiDUpdate
 componentWillUnmount
+componentDidCatch
 
 * __Con Hooks__:
 
+useState
 useEffect
 useLayoutEffect
 useMemo (el antiguo shouldComponentUpdate). Un hook
+
+### ¿Cómo corresponden los métodos del ciclo de vida a los Hooks?
+
+* **constructor**: Los componentes de Función no requieren un constructor. Puedes inicializar el estado en la llamada a **useState**. Si el cálculo del estado inicial es costoso, puedes pasar una función a useState.
+
+* **getDerivedStateFromProps**: Agenda una actualización **durante** el renderizado.
+
+* **shouldComponentUpdate**: **React.memo** y **useMemo**.
+
+* **render**: Es el cuerpo del componente de función en sí, el **return**.
+
+* **componentDidMount, componentDidUpdate, componentWillUnmount**: El Hook **useEffect** puede expresar todas las combinaciones de estos (incluyendo casos poco comunes).
+
+* **getSnapshotBeforeUpdate, componentDidCatch y getDerivedStateFromError**: Aún no hay Hooks equivalentes a estos métodos, pero serán añadidos pronto.
