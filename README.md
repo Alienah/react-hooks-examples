@@ -45,11 +45,11 @@ it('matches snapshop', () => {
 
 Para actualizar snapshot:
 
-En las opciones que tiene el wtach del testing, la opción "u"
+En las opciones que tiene el watch del testing, la opción "u"
 
 ### ACCEPTANCE TESTS
 
-Endtoend, integration pero en un entorno falso
+Es la fase final del testing donde se comprueba que cumple con los criterios de aceptación, para lo cual serán test en los que se integren varios de esos criterios. Estos test se harán en un entorno previo a producción.
 
 * Cypress
 
@@ -59,9 +59,15 @@ Endtoend, integration pero en un entorno falso
 
 * TestCafe
 
-##3 END2END TESTS
+### END2END TESTS
 
-Test en eun entorno real, en el navegador
+Comprueban flujos de nuestra aplicación, es decir, desde que comienza hast que acaba.
+
+Test en un entorno real, en el navegador
+
+* Cypress
+
+* Jest + Puppeteer
 
 * Selenium
 
