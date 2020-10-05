@@ -1,68 +1,157 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ℹ️ This documentation is written in Spanish, as learning notes. For more information on how to start the project and what commands can be used, you can consult the documentation provided by React at [doc folder](/doc)
 
-## Available Scripts
+# 📝 REACT TESTING
 
-In the project directory, you can run:
+## TYPE OF TESTS
 
-### `npm start`
+### UNIT TESTS
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* **Jest**
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Viene incluido con create-react-app
 
-### `npm test`
+* **Jest + enzime**
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Con enzime tienes disponible una manera fácil de navegar a través del dom para hacer las comprobaciones
 
-### `npm run build`
+* **Jest + react-testing-library**
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```npm install @testing-library/jest-dom --save-dev```
+```npm install @testing-library/react --save-dev```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Sirve para testear los componentes tal como los usaría el usuario final.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### SNAPSHOTS
 
-### `npm run eject`
+```npm i react-test-renderer --save-dev```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+tenemos que crear una carpeta en components o dentro de la carpeta del componente una carpeta llamada __ snapshots __ y ahí se alojarán los snapshots.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js
+import React from 'react';
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+//Snapshot
+import ReactTestRenderer from 'react-test-renderer';
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+afterEach(cleanup);
 
-## Learn More
+// Snapshop testing
+it('matches snapshop', () => {
+  // Esto creará un objeto. primero crea en el dom y luego lo transformamos a JSON
+  const tree = ReactTestRenderer.create(<Button label="save"></Button>).toJSON();
+  expect(tree).toMatchSnapshot();
+})
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Para actualizar snapshot:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+En las opciones que tiene el wtach del testing, la opción "u"
 
-### Code Splitting
+### ACCEPTANCE TESTS
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Endtoend, integration pero en un entorno falso
 
-### Analyzing the Bundle Size
+* Cypress
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+* Jest + Puppeteer
 
-### Making a Progressive Web App
+* Bigtest
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+* TestCafe
 
-### Advanced Configuration
+##3 END2END TESTS
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Test en eun entorno real, en el navegador
 
-### Deployment
+* Selenium
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+## UNIT TEST con jest Y react test renderer
 
-### `npm run build` fails to minify
+Vamos a estructurar los componentes por carpetas y dentro de la carpeta del componente habrá una carpeta llamada "__ test __" en la que estará el test de mi componente con una extensión así: ```component.test.js```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Vamos a ver ejemplos de test para este componente:
+
+```js
+//Button.js
+
+import React from 'react';
+import './button.scss';
+
+function button({label}) {
+  return <div data-testid="button" className="button">{label}</div>
+}
+
+export default button;
+```
+
+```js
+// App.js
+
+import React, {useReducer} from 'react';
+import Button from "./components/button/button";
+
+import './App.scss';
+
+function App() {
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Example for testing</h1>
+        <Button label="Click me please"></Button>
+      </header>
+    </div>
+  );
+}
+
+export default App;
+```
+
+Y ahora varios ejemplos de test con diferentes librerías:
+
+```js
+// button.test.js
+
+import React from 'react';
+//Para renderizar el dom en el test
+import ReactDOM from 'react-dom';
+import Button from './../button';
+
+//Otra render diferente, pues es otra librería
+import { render, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+
+//Snapshot
+import ReactTestRenderer from 'react-test-renderer';
+
+afterEach(cleanup);
+
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<Button></Button>, div);
+})
+
+it('renders button correctly', () => {
+  // Este es el render de la librería react testing library y devuelve varias cosas, una es el método getByTestId
+  const {getByTestId} = render(<Button label="click me"></Button>)
+  expect(getByTestId('button')).toHaveTextContent('click me');;
+})
+
+it('renders button correctly', () => {
+  // Otro test con otro texto
+  const {getByTestId} = render(<Button label="save"></Button>)
+  expect(getByTestId('button')).toHaveTextContent('save');;
+})
+
+// Snapshop testing
+it('matches snapshop', () => {
+  // Esto creará un objeto. primero crea en el dom y luego lo transformamos a JSON
+  const tree = ReactTestRenderer.create(<Button label="save"></Button>).toJSON();
+  expect(tree).toMatchSnapshot();
+})
+
+it('matches snapshop with another text', () => {
+  const tree = ReactTestRenderer.create(<Button label="click"></Button>).toJSON();
+  expect(tree).toMatchSnapshot();
+})
+```
